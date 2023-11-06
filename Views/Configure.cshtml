@@ -1,0 +1,50 @@
+﻿@model ConfigurationModel
+
+@{
+	Layout = "_ConfigurePlugin";
+}
+
+@await Component.InvokeAsync(typeof(StoreScopeConfigurationViewComponent))
+
+<form asp-controller="BillingoInvoicing" asp-action="Configure" method="post">
+	<div class="cards-group">
+		<div class="card card-default card-outline card-info" id="pnlOnboarding">
+			<div class="card-header">
+				@T("Plugins.Misc.BillingoInvoicing.Title")
+			</div>
+			<div class="card-body">
+				<p>
+					Ez egy NopCommerce automatikus számlageneráló plugin a <a href="https://www.billingo.hu/ target=" _blank"">Billingo számlázórendszerhez</a>.<br />
+					Szükséges, hogy legyen <a href="https://www.billingo.hu/arak/api-tomeges" target="_blank">API és tömeges számlagenerálás előfizetése</a>.<br />
+					Kizárólag saját felelősségre használható!<br />
+					Hozzon létre egy V3 API kulcsot: <a href="https://support.billingo.hu/content/2092531786" target="_blank">Hol tudok API kulcsot generálni?</a>
+					Hozzon létre egy számlatömböt: <a href="https://support.billingo.hu/content/918716465">Új bizonylattömb létrehozása</a>
+				</p>
+				<hr />
+				<div class="form-group row">
+					<div class="col-md-3">
+					<nop-label asp-for="ApiKey" />
+					</div>
+					<div class="col-md-9">
+						<nop-editor asp-for="ApiKey" asp-required="true" />
+						<span asp-validation-for="ApiKey"></span>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-md-3">
+						<nop-label asp-for="BlockId" />
+					</div>
+					<div class="col-md-9">
+						<nop-editor asp-for="BlockId" asp-required="true" />
+						<span asp-validation-for="BlockId"></span>
+					</div>
+				</div>
+				<div class="form-group row" id="pnlSave">
+					<div class="col-md-9 offset-md-3">
+						<button type="submit" name="save" class="btn btn-primary">@T("Admin.Common.Save")</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
